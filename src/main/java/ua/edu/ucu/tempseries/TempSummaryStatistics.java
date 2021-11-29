@@ -1,5 +1,6 @@
 package ua.edu.ucu.tempseries;
 
+
 public final class TempSummaryStatistics {
     private final double avgTemp;
     private final double devTemp;
@@ -11,5 +12,10 @@ public final class TempSummaryStatistics {
         this.devTemp = devTemp;
         this.minTemp = minTemp;
         this.maxTemp = maxTemp;
+    }
+
+    public String toString(){
+        return ("TempSummaryStatistics object " + Double.toString(avgTemp) + ", " +
+                Double.toString(devTemp) + ", " + Double.toString(minTemp) + ", " + Double.toString(maxTemp));
     }
 }
