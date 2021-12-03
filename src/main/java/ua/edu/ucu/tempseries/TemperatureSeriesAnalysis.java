@@ -5,6 +5,8 @@ import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
     private double[] temperatureSeries;
+    private int min_temp = -273;
+    private int max_temp = 1000;
 
     public TemperatureSeriesAnalysis() {
 
@@ -39,11 +41,11 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double min() {
-        return findTempClosestToValue(-273);
+        return findTempClosestToValue(min_temp);
     }
 
     public double max() {
-        return findTempClosestToValue(1000);
+        return findTempClosestToValue(max_temp);
     }
 
     public double findTempClosestToZero() {
@@ -63,7 +65,7 @@ public class TemperatureSeriesAnalysis {
                 diff = Math.abs(tempValue - temp);
             }
         }
-        if (closestTemp < 0 && tempValue != -273) {
+        if (closestTemp < 0 && tempValue != min_temp) {
             for (int i = 0; i < temperatureSeries.length; i++) {
                 if ((Math.abs(tempValue - temperatureSeries[i]) == diff)
                         && (temperatureSeries[i] < 0)) {
@@ -138,7 +140,7 @@ public class TemperatureSeriesAnalysis {
             newTemperatureSeries[i] = temperatureSeries[i];
         }
         for (int i = 0; i < temps.length; i++) {
-            if (temps[i] < -273) {
+            if (temps[i] < min_temp) {
                 throw new InputMismatchException();
             }
             newTemperatureSeries[temperatureSeries.length+i] = temps[i];
