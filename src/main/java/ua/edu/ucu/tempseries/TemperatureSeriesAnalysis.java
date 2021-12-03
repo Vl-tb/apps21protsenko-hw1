@@ -11,7 +11,8 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
-        this.temperatureSeries = Arrays.copyOf(temperatureSeries, temperatureSeries.length);
+        this.temperatureSeries = Arrays.copyOf(temperatureSeries,
+                temperatureSeries.length);
     }
 
     public double average() throws IllegalArgumentException{
@@ -114,7 +115,8 @@ public class TemperatureSeriesAnalysis {
         return findTemps(tempValue, 1);
     }
 
-    public TempSummaryStatistics summaryStatistics() throws IllegalArgumentException{
+    public TempSummaryStatistics summaryStatistics()
+            throws IllegalArgumentException{
         if (temperatureSeries.length == 0) {
             throw new IllegalArgumentException();
         }
@@ -141,13 +143,4 @@ public class TemperatureSeriesAnalysis {
         this.temperatureSeries = newTemperatureSeries;
         return temperatureSeries.length;
     }
-
-//    public static void main(String[] args) {
-//        double[] arr= {-34,9,5,1.5,-1.5,-8,-7};
-//        TemperatureSeriesAnalysis an = new TemperatureSeriesAnalysis(arr);
-//        System.out.println(an.summaryStatistics());
-//        System.out.print(Arrays.toString(an.findTempsGreaterThen(0)));
-//        System.out.println(an.addTemps(2,4,8.9));
-//        System.out.println(Arrays.toString(an.temperatureSeries));
-//    }
 }
