@@ -15,7 +15,7 @@ public final class TempSummaryStatistics {
         this.maxTemp = maxTemp;
     }
 
-    public String toString(){
+    public String toString() {
         return ("TempSummaryStatistics object " + Double.toString(avgTemp)
                 +", " + Double.toString(devTemp) + ", "
                 +Double.toString(minTemp) + ", " + Double.toString(maxTemp));
