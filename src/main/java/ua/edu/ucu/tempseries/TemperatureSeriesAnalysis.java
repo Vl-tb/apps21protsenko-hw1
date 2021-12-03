@@ -15,6 +15,9 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double average() throws IllegalArgumentException{
+        if (temperatureSeries.length == 0) {
+            throw new IllegalArgumentException();
+        }
         double sum = 0;
         for (int i=0; i<temperatureSeries.length; i++){
             sum += temperatureSeries[i];
@@ -23,6 +26,9 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double deviation() throws IllegalArgumentException{
+        if (temperatureSeries.length == 0) {
+            throw new IllegalArgumentException();
+        }
         double mean = average();
         double variance = 0;
         for (int i=0; i<temperatureSeries.length; i++){
@@ -44,6 +50,9 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double findTempClosestToValue(double tempValue) throws IllegalArgumentException{
+        if (temperatureSeries.length == 0) {
+            throw new IllegalArgumentException();
+        }
         double diff = Double.POSITIVE_INFINITY;
         double closestTemp = 0;
         for (double temp : temperatureSeries) {
@@ -52,10 +61,10 @@ public class TemperatureSeriesAnalysis {
                 diff = Math.abs(tempValue - temp);
             }
         }
-        if (closestTemp < 0) {
+        if (closestTemp < 0 && tempValue != -273) {
             for (int i = 0; i < temperatureSeries.length; i++) {
-                if (temperatureSeries[i] == -1 * closestTemp) {
-                    return -1 * closestTemp;
+                if ((Math.abs(tempValue - temperatureSeries[i]) == diff) && (temperatureSeries[i] < 0)){
+                    return temperatureSeries[i];
                 }
             }
         }
@@ -64,6 +73,9 @@ public class TemperatureSeriesAnalysis {
 
 
     public double[] findTemps(double tempValue, int param) throws IllegalArgumentException{
+        if (temperatureSeries.length == 0) {
+            throw new IllegalArgumentException();
+        }
         boolean condition;
         int counter = 0;
         for (int i=0; i<temperatureSeries.length; i++){
@@ -103,6 +115,9 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TempSummaryStatistics summaryStatistics() throws IllegalArgumentException{
+        if (temperatureSeries.length == 0) {
+            throw new IllegalArgumentException();
+        }
         double avg = this.average();
         double dev = this.deviation();
         double min = this.min();
@@ -119,7 +134,7 @@ public class TemperatureSeriesAnalysis {
         }
         for (int i=0; i<temps.length; i++){
             if (temps[i] < -273){
-                return temperatureSeries.length;
+                throw new InputMismatchException();
             }
             newTemperatureSeries[temperatureSeries.length+i] = temps[i];
         }
@@ -127,12 +142,12 @@ public class TemperatureSeriesAnalysis {
         return temperatureSeries.length;
     }
 
-    public static void main(String[] args) {
-        double[] arr= {-34,9,5,1.5,-1.5,-8,-7};
-        TemperatureSeriesAnalysis an = new TemperatureSeriesAnalysis(arr);
-        System.out.println(an.summaryStatistics());
-        System.out.print(Arrays.toString(an.findTempsGreaterThen(0)));
-        System.out.println(an.addTemps(2,4,8.9));
-        System.out.println(Arrays.toString(an.temperatureSeries));
-    }
+//    public static void main(String[] args) {
+//        double[] arr= {-34,9,5,1.5,-1.5,-8,-7};
+//        TemperatureSeriesAnalysis an = new TemperatureSeriesAnalysis(arr);
+//        System.out.println(an.summaryStatistics());
+//        System.out.print(Arrays.toString(an.findTempsGreaterThen(0)));
+//        System.out.println(an.addTemps(2,4,8.9));
+//        System.out.println(Arrays.toString(an.temperatureSeries));
+//    }
 }
