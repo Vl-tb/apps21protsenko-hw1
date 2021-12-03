@@ -5,8 +5,8 @@ import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
     private double[] temperatureSeries;
-    private int min_temp = -273;
-    private int max_temp = 1000;
+    private int minTemp;
+    private int maxTemp;
 
     public TemperatureSeriesAnalysis() {
 
@@ -15,6 +15,8 @@ public class TemperatureSeriesAnalysis {
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         this.temperatureSeries = Arrays.copyOf(temperatureSeries,
                 temperatureSeries.length);
+        minTemp = -273;
+        maxTemp = 1000;
     }
 
     public double average() throws IllegalArgumentException {
@@ -41,11 +43,11 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double min() {
-        return findTempClosestToValue(min_temp);
+        return findTempClosestToValue(minTemp);
     }
 
     public double max() {
-        return findTempClosestToValue(max_temp);
+        return findTempClosestToValue(maxTemp);
     }
 
     public double findTempClosestToZero() {
@@ -65,7 +67,7 @@ public class TemperatureSeriesAnalysis {
                 diff = Math.abs(tempValue - temp);
             }
         }
-        if (closestTemp < 0 && tempValue != min_temp) {
+        if (closestTemp < 0 && tempValue != minTemp) {
             for (int i = 0; i < temperatureSeries.length; i++) {
                 if ((Math.abs(tempValue - temperatureSeries[i]) == diff)
                         && (temperatureSeries[i] < 0)) {
@@ -140,7 +142,7 @@ public class TemperatureSeriesAnalysis {
             newTemperatureSeries[i] = temperatureSeries[i];
         }
         for (int i = 0; i < temps.length; i++) {
-            if (temps[i] < min_temp) {
+            if (temps[i] < minTemp) {
                 throw new InputMismatchException();
             }
             newTemperatureSeries[temperatureSeries.length+i] = temps[i];
